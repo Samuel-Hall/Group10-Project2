@@ -4,13 +4,15 @@
     "password": "root",
     "database": "expensedb",
     "host": "localhost",
-    "port": "8889",
-    "dialect": "mysql"
+
+    "dialect": "mysql",
+    "port": 3306
+
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "testdb",
+    "password": "root",
+    "database": "expensedb",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false

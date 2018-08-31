@@ -8,20 +8,23 @@ var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveExample: function(expense) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/expenses",
+      data: JSON.stringify(expense)
     });
   },
   getExamples: function() {
+    console.log("getting examples!");
     return $.ajax({
-      url: "api/examples",
+      url: "api/expenses/",
       type: "GET"
+    }).then(function(results) {
+      console.log(results);
     });
   },
   deleteExample: function(id) {
@@ -109,3 +112,5 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+refreshExamples();
