@@ -1,6 +1,8 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var title = $("#title");
+var total = $("#total");
+var date = $("#date");
+var category = $("#category");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
@@ -66,18 +68,28 @@ var refreshExamples = function() {
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
+  console.log("hello");
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  console.log("title: " + title.val());
+  console.log("total: " + total.val());
+  console.log("date: " + date.val());
+  console.log("category: " + category.val());
+
+  var expense = {
+    title: title.val().trim(),
+    total: total.val().trim(),
+    date: date.val().trim(),
+    category: category.val().trim()
   };
+
+  console.log(expense);
 
   if (!(example.text && example.description)) {
     alert("You must enter an example text and description!");
     return;
   }
 
-  API.saveExample(example).then(function() {
+  API.saveExample(expense).then(function() {
     refreshExamples();
   });
 

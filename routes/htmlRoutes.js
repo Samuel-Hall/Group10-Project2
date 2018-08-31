@@ -2,14 +2,15 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
-  // app.get("/", function(req, res) {
-  //   db.Expense.findAll({}).then(function(dbExpenses) {
-  //     res.render("index", {
-  //       msg: "Welcome!",
-  //       examples: dbExpenses
-  //     });
-  //   });
-  // });
+
+  app.get("/", function(req, res) {
+    // db.Example.findAll({}).then(function(dbExamples) {
+    res.render("index", {
+      msg: "Welcome!"
+      // examples: dbExamples
+    });
+    // });
+  });
 
   app.get("/history", function(req, res) {
     res.render("history", {
