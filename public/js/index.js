@@ -21,9 +21,11 @@ var API = {
     return $.ajax({
       url: "api/expenses/",
       type: "GET"
-    }).then(function(results) {
-      console.log(results);
     });
+
+    // .then(function(results) {
+    //   console.log(results);
+    // })
   },
   deleteExample: function(id) {
     return $.ajax({
@@ -36,17 +38,20 @@ var API = {
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function() {
   API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+    console.log("Refresh Examples data: ", data);
+    var $examples = data.map(function(history) {
+      var $div = $("<div>").text(
+        `Expense: ${history.expense}\nTotal: $${history.total}\nCategory: ${
+          history.category
+        }`
+      );
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": history.id
         })
-        .append($a);
+        .append($div);
 
       var $button = $("<button>")
         .addClass("btn btn-danger float-right delete")
