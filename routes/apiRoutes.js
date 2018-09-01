@@ -3,7 +3,12 @@ var db = require("../models");
 module.exports = function(app) {
   // Get all examples
   app.get("/api/expenses/", function(req, res) {
-    db.Expense.findAll({})
+    db.Expense.findAll({
+      order: [
+        // Will escape title and validate DESC against a list of valid direction parameters
+        ["date", "DESC"]
+      ]
+    })
       .then(function(dbExpenses) {
         res.json(dbExpenses);
         console.log("List of Expenses ", dbExpenses);
