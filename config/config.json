@@ -4,7 +4,6 @@
     "password": "root",
     "database": "expensedb",
     "host": "localhost",
-
     "dialect": "mysql",
     "port": 3306
 

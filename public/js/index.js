@@ -4,7 +4,7 @@ var total = $("#total");
 var date = $("#date");
 var category = $("#category");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $expenseList = $("#expense-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -18,8 +18,8 @@ var API = {
       data: JSON.stringify(expense)
     });
   },
-  getExamples: function() {
-    console.log("getting examples!");
+  getExpenses: function() {
+    console.log("getting expenses!");
     return $.ajax({
       url: "api/expenses/",
       type: "GET"
@@ -38,34 +38,55 @@ var API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
+var refreshExpenses = function() {
+  API.getExpenses().then(function(data) {
     console.log("Refresh Examples data: ", data);
-    var $examples = data.map(function(history) {
-      var $div = $("<div>").text(
-        `Expense: ${history.expense}\nTotal: $${history.total}\nCategory: ${
-          history.category
-        }`
-      );
+    for (var i = 0; i < data.length; i++) {
+      var $expenesRow = $("<tr>").attr({
+        id: data[i].id
+      });
+      $expenseList.append($expenesRow);
+      for (var property in data[i]) {
+        if (
+          property !== "id" &&
+          property !== "createdAt" &&
+          property !== "updatedAt"
+        ) {
+          var $expenseData = $("<td>").text(data[i][property]);
+          $expenesRow.append($expenseData);
+        }
+      }
+    }
+    // var $expenses = data.map(function(history) {
+    //for each entry in the expense table, create a new row on the page with id of primary key
+    // var expenseRow = expenseList.append("<tr>").attr({
+    //   "data-id": history.id
+    // });
+    // var $td = $("<td>").append(
+    //   ${history.expense}\nTotal: $${history.total}\nCategory: ${
+    //     history.category
+    //   }
+    // );
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": history.id
-        })
-        .append($div);
+    // var $li = $("<li>")
+    //   .attr({
+    //     class: "list-group-item",
+    //     "data-id": history.id
+    //   })
+    //   .append($div);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+    // var $button = $("<button>")
+    //   .addClass("btn btn-danger float-right delete")
+    //   .text("ｘ");
 
-      $li.append($button);
+    // $li.append($button);
 
-      return $li;
-    });
+    // return $li;
+    // console.log("history is " + history);
+    // });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    // $expenseList.empty();
+    // $expenseList.append($expenses);
   });
 };
 
@@ -116,6 +137,6 @@ var handleDeleteBtnClick = function() {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$expenseList.on("click", ".delete", handleDeleteBtnClick);
 
-refreshExamples();
+refreshExpenses();

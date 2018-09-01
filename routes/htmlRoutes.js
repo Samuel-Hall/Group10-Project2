@@ -11,12 +11,6 @@ module.exports = function(app) {
     });
     // });
   });
-
-  app.get("/history", function(req, res) {
-    res.render("history", {
-      msg: "Expense history"
-    });
-  });
   // Load example page and pass in an example by id
   // app.get("/example/:id", function(req, res) {
   //   db.Expense.findOne({ where: { id: req.params.id } }).then(function(
