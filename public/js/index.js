@@ -8,7 +8,7 @@ var $expenseList = $("#expense-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(expense) {
+  saveExpense: function(expense) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -28,6 +28,17 @@ var API = {
     // .then(function(results) {
     //   console.log(results);
     // })
+  },
+  updateExpense: function(expense) {
+    console.log("Updating expense");
+    $.ajax({
+      method: "PUT",
+      url: "/api/expenses/",
+      data: expense
+    });
+    // .then(function() {
+    //   window.location.href = "/";
+    // });
   },
   deleteExpense: function(id) {
     return $.ajax({
@@ -115,7 +126,7 @@ var handleFormSubmit = function(event) {
   }
 
   API.saveExample(expense).then(function() {
-    refreshExamples();
+    refreshExpenses();
   });
 
   $exampleText.val("");
@@ -137,8 +148,22 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+var handleUpdateBtnClick = function() {
+  var idToUpdate = parseInt(
+    $(this)
+      .attr("id")
+      .slice(6)
+  );
+  console.log("Updating item #" + idToUpdate + "...");
+
+  // API.updateExpense(idToUpdate).then(function() {
+  //   refreshExpenses();
+  // });
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $expenseList.on("click", ".delete", handleDeleteBtnClick);
+$expenseList.on("click", ".update", handleUpdateBtnClick);
 
 refreshExpenses();
