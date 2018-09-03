@@ -11,27 +11,27 @@ module.exports = function(app) {
     })
       .then(function(dbExpenses) {
         res.json(dbExpenses);
-        console.log("List of Expenses ", dbExpenses);
+        // console.log("List of Expenses ", dbExpenses);
       })
       .catch(function(err) {
         console.log(err);
       });
   });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
+  // Create a new expense
+  app.post("/api/expenses", function(req, res) {
     console.log(req);
-    db.Expense.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+    db.Expense.create(req.body).then(function(dbExpense) {
+      res.json(dbExpense);
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
+  // Delete an expense by id
+  app.delete("/api/expenses/:id", function(req, res) {
+    db.Expense.destroy({ where: { id: req.params.id } }).then(function(
+      dbExpense
     ) {
-      res.json(dbExample);
+      res.json(dbExpense);
     });
   });
 };

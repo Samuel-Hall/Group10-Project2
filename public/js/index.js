@@ -29,9 +29,9 @@ var API = {
     //   console.log(results);
     // })
   },
-  deleteExample: function(id) {
+  deleteExpense: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/expenses/" + id,
       type: "DELETE"
     });
   }
@@ -39,54 +39,53 @@ var API = {
 
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExpenses = function() {
+  $expenseList.html(
+    "<tr><th scope='col'>Expense</th><th scope='col'>Total</th><th scope='col'>Date</th><th scope='col'>Category</th><th scope='col'>Edit/Delete</th></tr>"
+  );
   API.getExpenses().then(function(data) {
-    console.log("Refresh Examples data: ", data);
+    console.log("Refreshing expenses data: ", data);
     for (var i = 0; i < data.length; i++) {
-      var $expenesRow = $("<tr>").attr({
+      var updateBtn = $("<button>")
+        .attr({
+          class: "btn btn-success update",
+          id: "update" + data[i].id
+        })
+        .append(
+          $("<i>").attr({
+            class: "far fa-edit"
+          })
+        );
+      var deleteBtn = $("<button>")
+        .attr({
+          class: "btn btn-danger float-right delete",
+          id: "delete" + data[i].id
+        })
+        .append(
+          $("<i>").attr({
+            class: "far fa-times-circle"
+          })
+        );
+      var $expenseRow = $("<tr>").attr({
         id: data[i].id
       });
-      $expenseList.append($expenesRow);
+      $expenseList.append($expenseRow);
       for (var property in data[i]) {
         if (
           property !== "id" &&
           property !== "createdAt" &&
           property !== "updatedAt"
         ) {
-          var $expenseData = $("<td>").text(data[i][property]);
-          $expenesRow.append($expenseData);
+          if (property === "total") {
+            var $expenseData = $("<td>").text("$" + data[i][property]);
+            $expenseRow.append($expenseData);
+          } else {
+            var $expenseData = $("<td>").text(data[i][property]);
+            $expenseRow.append($expenseData);
+          }
         }
       }
+      $expenseRow.append($("<td>").append(updateBtn, [deleteBtn]));
     }
-    // var $expenses = data.map(function(history) {
-    //for each entry in the expense table, create a new row on the page with id of primary key
-    // var expenseRow = expenseList.append("<tr>").attr({
-    //   "data-id": history.id
-    // });
-    // var $td = $("<td>").append(
-    //   ${history.expense}\nTotal: $${history.total}\nCategory: ${
-    //     history.category
-    //   }
-    // );
-
-    // var $li = $("<li>")
-    //   .attr({
-    //     class: "list-group-item",
-    //     "data-id": history.id
-    //   })
-    //   .append($div);
-
-    // var $button = $("<button>")
-    //   .addClass("btn btn-danger float-right delete")
-    //   .text("ｘ");
-
-    // $li.append($button);
-
-    // return $li;
-    // console.log("history is " + history);
-    // });
-
-    // $expenseList.empty();
-    // $expenseList.append($expenses);
   });
 };
 
@@ -126,12 +125,15 @@ var handleFormSubmit = function(event) {
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
 var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
+  var idToDelete = parseInt(
+    $(this)
+      .attr("id")
+      .slice(6)
+  );
+  console.log("Deleting item #" + idToDelete + "...");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deleteExpense(idToDelete).then(function() {
+    refreshExpenses();
   });
 };
 
