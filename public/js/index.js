@@ -149,12 +149,21 @@ var handleDeleteBtnClick = function() {
 };
 
 var handleUpdateBtnClick = function() {
+  var valArray = ["", 0, "", ""];
   var idToUpdate = parseInt(
     $(this)
       .attr("id")
       .slice(6)
   );
   console.log("Updating item #" + idToUpdate + "...");
+  var rowToUpdate = $("#" + idToUpdate).contents();
+  console.log(rowToUpdate);
+  for (var j = 0; j < 4; j++) {
+    var rowField = rowToUpdate[j].innerText;
+    console.log("Row field: " + rowField);
+    valArray[j] = rowField;
+  }
+  console.log(valArray);
 
   // API.updateExpense(idToUpdate).then(function() {
   //   refreshExpenses();
