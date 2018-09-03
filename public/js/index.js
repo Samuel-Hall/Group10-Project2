@@ -149,7 +149,7 @@ var handleDeleteBtnClick = function() {
 };
 
 var handleUpdateBtnClick = function() {
-  var valArray = ["", 0, "", ""];
+  var valArray = [];
   var idToUpdate = parseInt(
     $(this)
       .attr("id")
@@ -160,8 +160,11 @@ var handleUpdateBtnClick = function() {
   console.log(rowToUpdate);
   for (var j = 0; j < 4; j++) {
     var rowField = rowToUpdate[j].innerText;
+    if (rowField.includes("$")) {
+      rowField = rowField.split("$").pop();
+    }
     console.log("Row field: " + rowField);
-    valArray[j] = rowField;
+    valArray.push(rowField);
   }
   console.log(valArray);
 
