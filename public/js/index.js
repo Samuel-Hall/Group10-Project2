@@ -165,6 +165,24 @@ var handleUpdateBtnClick = function() {
   var rowField;
 
   console.log(rowToUpdate);
+  function displayEditModal() {
+    modal.style.display = "block";
+    for (var l = 0; l < categoryArray.length; l++) {
+      var newOption = $("<option>")
+        .attr({
+          value: categoryArray[l]
+        })
+        .text(categoryArray[l]);
+      $("#editCategory").append(newOption);
+    }
+    $("#editExpense").val(valArray[0]);
+    $("#editTotal").val(valArray[1]);
+    $("#editDate").val(valArray[2]);
+    $("#editCategory").val(valArray[3]);
+
+    // Date picker for edit date field
+    $("#editDate").datepicker();
+  }
 
   function getValues(data) {
     // Get the text for each td in the tr
@@ -179,7 +197,7 @@ var handleUpdateBtnClick = function() {
       valArray.push(rowField);
     }
     // insertEditFields();
-    modal.style.display = "block";
+    displayEditModal();
   }
   // This function replaced all the td in each row
   // function insertEditFields() {
