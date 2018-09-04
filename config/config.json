@@ -1,12 +1,11 @@
 {
   "development": {
     "username": "root",
-    "password": "pip123",
+    "password": "root",
     "database": "expensedb",
     "host": "localhost",
     "dialect": "mysql",
     "port": 3306
-
   },
   "test": {
     "username": "root",
