@@ -1,11 +1,19 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
+  // Create a new expense
+  app.post("/api/expenses", function(req, res) {
+    console.log(req);
+    db.Expense.create(req.body).then(function(dbExpense) {
+      res.json(dbExpense);
+    });
+  });
+
+  // Read all expenses
   app.get("/api/expenses/", function(req, res) {
     db.Expense.findAll({
       order: [
-        // Will escape title and validate DESC against a list of valid direction parameters
+        // Will escape date and validate DESC against a list of valid direction parameters
         ["date", "DESC"]
       ]
     })
@@ -18,10 +26,13 @@ module.exports = function(app) {
       });
   });
 
-  // Create a new expense
-  app.post("/api/expenses", function(req, res) {
-    console.log(req);
-    db.Expense.create(req.body).then(function(dbExpense) {
+  // Update an expense by id
+  app.put("/api/expenses", function(req, res) {
+    db.Expense.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(dbExpense) {
       res.json(dbExpense);
     });
   });
