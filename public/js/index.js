@@ -163,7 +163,7 @@ var handleUpdateBtnClick = function() {
 
   console.log(rowToUpdate);
 
-  function getValues(data, callback) {
+  function getValues(data) {
     for (var j = 0; j < 4; j++) {
       rowField = data[j].innerText;
       if (rowField.includes("$")) {
@@ -171,21 +171,38 @@ var handleUpdateBtnClick = function() {
       }
       console.log("Row field: " + rowField);
       valArray.push(rowField);
-      callback(j);
     }
+    insertTextFields(valArray);
   }
-  function insertTextField(index) {
-    console.log("Inserting text field...");
-    console.log("Current field value: " + rowToUpdate[index]);
-    // rowToUpdate[index].innerHTML = "";
-    rowToUpdate[index].innerHTML = $("<input>")
-      .attr({
-        id: "field",
-        type: "text"
-      })
-      .val(rowField);
+  function insertTextFields(data) {
+    // $("#" + idToUpdate).html("");
+    for (var k = 0; k < 4; k++) {
+      var newInput = $("<input>")
+        .attr({
+          id: "field" + k,
+          type: "text"
+        })
+        .val(valArray[k]);
+      console.log("Inserting text field...");
+      console.log(rowToUpdate[k]);
+      var fieldValue = rowToUpdate[k];
+      $(fieldValue).html(
+        $("<form>")
+          .attr({ id: "newForm" })
+          .append(newInput)
+      );
+    }
+    // console.log("Inserting text field...");
+    // console.log("Current field value: " + rowToUpdate[index]);
+    // // rowToUpdate[index].innerHTML = "";
+    // rowToUpdate[index].innerHTML = $("<input>")
+    //   .attr({
+    //     id: "field",
+    //     type: "text"
+    //   })
+    //   .val(rowField);
   }
-  getValues(rowToUpdate, insertTextField);
+  getValues(rowToUpdate);
 
   console.log(valArray);
 
