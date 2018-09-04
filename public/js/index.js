@@ -7,6 +7,7 @@ var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
+//**post request to send the data that i have in the text field**
 var API = {
   saveExample: function(expense) {
     return $.ajax({

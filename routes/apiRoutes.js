@@ -13,6 +13,8 @@ module.exports = function(app) {
       });
   });
 
+  // //**create the entry into the database**
+
   // Create a new example
   app.post("/api/examples", function(req, res) {
     console.log(req);
