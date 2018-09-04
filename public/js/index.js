@@ -5,6 +5,7 @@ var date = $("#date");
 var category = $("#category");
 var $submitBtn = $("#submit");
 var $expenseList = $("#expense-list");
+var categoryArray = ["Category 1", "Category 2", "Category 3"];
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -172,35 +173,64 @@ var handleUpdateBtnClick = function() {
       console.log("Row field: " + rowField);
       valArray.push(rowField);
     }
-    insertTextFields(valArray);
+    insertEditFields();
   }
-  function insertTextFields(data) {
-    // $("#" + idToUpdate).html("");
-    for (var k = 0; k < 4; k++) {
-      var newInput = $("<input>")
-        .attr({
-          id: "field" + k,
-          type: "text"
-        })
-        .val(valArray[k]);
-      console.log("Inserting text field...");
-      console.log(rowToUpdate[k]);
-      var fieldValue = rowToUpdate[k];
-      $(fieldValue).html(
-        $("<form>")
-          .attr({ id: "newForm" })
-          .append(newInput)
-      );
+  function insertEditFields() {
+    var newOption;
+    for (var k = 0; k < 5; k++) {
+      if (k < 3) {
+        var newInput = $("<input>")
+          .attr({
+            id: "field" + k,
+            type: "text"
+          })
+          .val(valArray[k]);
+        console.log("Inserting text field...");
+        console.log(rowToUpdate[k]);
+        var fieldValue = rowToUpdate[k];
+        $(fieldValue).html(
+          $("<form>")
+            .attr({ id: "newForm" + k })
+            .append(newInput)
+        );
+      } else if (k === 3) {
+        var newDrop = $("<select>").attr({
+          id: "fieldDrop" + idToUpdate
+        });
+        var fieldValue = rowToUpdate[k];
+        $(fieldValue).html(
+          $("<form>")
+            .attr({ id: "newForm" + k })
+            .append(newDrop)
+        );
+        for (var l = 0; l < categoryArray.length; l++) {
+          newOption = $("<option>")
+            .attr({
+              value: categoryArray[l]
+            })
+            .text(categoryArray[l]);
+          $(newDrop).append(newOption);
+        }
+      } else if (k === 4) {
+        console.log("Creating save button...");
+        var saveBtn = $("<button>")
+          .attr({
+            class: "btn btn-info save",
+            id: "save" + idToUpdate
+          })
+          .append(
+            $("<i>").attr({
+              class: "far fa-save"
+            })
+          );
+        var fieldValue = rowToUpdate[k];
+        $(fieldValue).html(
+          $("<form>")
+            .attr({ id: "newForm" + k })
+            .append(saveBtn)
+        );
+      }
     }
-    // console.log("Inserting text field...");
-    // console.log("Current field value: " + rowToUpdate[index]);
-    // // rowToUpdate[index].innerHTML = "";
-    // rowToUpdate[index].innerHTML = $("<input>")
-    //   .attr({
-    //     id: "field",
-    //     type: "text"
-    //   })
-    //   .val(rowField);
   }
   getValues(rowToUpdate);
 
