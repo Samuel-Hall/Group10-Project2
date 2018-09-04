@@ -155,17 +155,38 @@ var handleUpdateBtnClick = function() {
       .attr("id")
       .slice(6)
   );
+
   console.log("Updating item #" + idToUpdate + "...");
+
   var rowToUpdate = $("#" + idToUpdate).contents();
+  var rowField;
+
   console.log(rowToUpdate);
-  for (var j = 0; j < 4; j++) {
-    var rowField = rowToUpdate[j].innerText;
-    if (rowField.includes("$")) {
-      rowField = rowField.split("$").pop();
+
+  function getValues(data, callback) {
+    for (var j = 0; j < 4; j++) {
+      rowField = data[j].innerText;
+      if (rowField.includes("$")) {
+        rowField = rowField.split("$").pop();
+      }
+      console.log("Row field: " + rowField);
+      valArray.push(rowField);
+      callback(j);
     }
-    console.log("Row field: " + rowField);
-    valArray.push(rowField);
   }
+  function insertTextField(index) {
+    console.log("Inserting text field...");
+    console.log("Current field value: " + rowToUpdate[index]);
+    // rowToUpdate[index].innerHTML = "";
+    rowToUpdate[index].innerHTML = $("<input>")
+      .attr({
+        id: "field",
+        type: "text"
+      })
+      .val(rowField);
+  }
+  getValues(rowToUpdate, insertTextField);
+
   console.log(valArray);
 
   // API.updateExpense(idToUpdate).then(function() {
