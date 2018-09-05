@@ -34,12 +34,11 @@ var API = {
     console.log("Updating expense");
     $.ajax({
       method: "PUT",
-      url: "/api/expenses/",
+      url: "/api/expenses",
       data: expense
+    }).then(function() {
+      window.location.href = "/home";
     });
-    // .then(function() {
-    //   window.location.href = "/";
-    // });
   },
   deleteExpense: function(id) {
     return $.ajax({
@@ -152,6 +151,13 @@ var handleDeleteBtnClick = function() {
 var handleUpdateBtnClick = function() {
   // Array to hold current row values
   var valArray = [];
+  var updatedExpense = {
+    id: 0,
+    expense: "",
+    total: 0,
+    date: "",
+    category: ""
+  };
   // Get id of the row entry
   var idToUpdate = parseInt(
     $(this)
@@ -167,6 +173,7 @@ var handleUpdateBtnClick = function() {
   console.log(rowToUpdate);
   function displayEditModal() {
     modal.style.display = "block";
+    $("#editCategory").html("");
     for (var l = 0; l < categoryArray.length; l++) {
       var newOption = $("<option>")
         .attr({
@@ -181,10 +188,12 @@ var handleUpdateBtnClick = function() {
     $("#editCategory").val(valArray[3]);
 
     // Date picker for edit date field
-    $("#editDate").datepicker();
+    $("#editDate").datepicker({
+      dateFormat: "yy-mm-dd"
+    });
   }
 
-  function getValues(data) {
+  function getCurrentValues(data) {
     // Get the text for each td in the tr
     for (var j = 0; j < 4; j++) {
       rowField = data[j].innerText;
@@ -257,13 +266,26 @@ var handleUpdateBtnClick = function() {
   //     }
   //   }
   // }
-  getValues(rowToUpdate);
+  function updateExpense() {
+    updatedExpense.id = idToUpdate;
+    updatedExpense.expense = $("#editExpense").val();
+    updatedExpense.total = $("#editTotal").val();
+    updatedExpense.date = $("#editDate").val();
+    updatedExpense.category = $("#editCategory").val();
+    console.log("Updated expense: ", updatedExpense);
+    API.updateExpense(updatedExpense);
+    // .then(function() {
+    //   refreshExpenses();
+    // });
+  }
+  $(".saveEdit").on("click", function() {
+    event.preventDefault();
+    updateExpense();
+    modal.style.display = "none";
+  });
+  getCurrentValues(rowToUpdate);
 
   console.log(valArray);
-
-  // API.updateExpense(idToUpdate).then(function() {
-  //   refreshExpenses();
-  // });
 };
 
 // Add event listeners to the submit and delete buttons
