@@ -150,7 +150,9 @@ var handleDeleteBtnClick = function() {
 };
 
 var handleUpdateBtnClick = function() {
+  // Array to hold current row values
   var valArray = [];
+  // Get id of the row entry
   var idToUpdate = parseInt(
     $(this)
       .attr("id")
@@ -163,75 +165,98 @@ var handleUpdateBtnClick = function() {
   var rowField;
 
   console.log(rowToUpdate);
+  function displayEditModal() {
+    modal.style.display = "block";
+    for (var l = 0; l < categoryArray.length; l++) {
+      var newOption = $("<option>")
+        .attr({
+          value: categoryArray[l]
+        })
+        .text(categoryArray[l]);
+      $("#editCategory").append(newOption);
+    }
+    $("#editExpense").val(valArray[0]);
+    $("#editTotal").val(valArray[1]);
+    $("#editDate").val(valArray[2]);
+    $("#editCategory").val(valArray[3]);
+
+    // Date picker for edit date field
+    $("#editDate").datepicker();
+  }
 
   function getValues(data) {
+    // Get the text for each td in the tr
     for (var j = 0; j < 4; j++) {
       rowField = data[j].innerText;
+      // Remove $ from total
       if (rowField.includes("$")) {
         rowField = rowField.split("$").pop();
       }
       console.log("Row field: " + rowField);
+      // Update value array
       valArray.push(rowField);
     }
-    insertEditFields();
+    // insertEditFields();
+    displayEditModal();
   }
-  function insertEditFields() {
-    var newOption;
-    for (var k = 0; k < 5; k++) {
-      if (k < 3) {
-        var newInput = $("<input>")
-          .attr({
-            id: "field" + k,
-            type: "text"
-          })
-          .val(valArray[k]);
-        console.log("Inserting text field...");
-        console.log(rowToUpdate[k]);
-        var fieldValue = rowToUpdate[k];
-        $(fieldValue).html(
-          $("<form>")
-            .attr({ id: "newForm" + k })
-            .append(newInput)
-        );
-      } else if (k === 3) {
-        var newDrop = $("<select>").attr({
-          id: "fieldDrop" + idToUpdate
-        });
-        var fieldValue = rowToUpdate[k];
-        $(fieldValue).html(
-          $("<form>")
-            .attr({ id: "newForm" + k })
-            .append(newDrop)
-        );
-        for (var l = 0; l < categoryArray.length; l++) {
-          newOption = $("<option>")
-            .attr({
-              value: categoryArray[l]
-            })
-            .text(categoryArray[l]);
-          $(newDrop).append(newOption);
-        }
-      } else if (k === 4) {
-        console.log("Creating save button...");
-        var saveBtn = $("<button>")
-          .attr({
-            class: "btn btn-info save",
-            id: "save" + idToUpdate
-          })
-          .append(
-            $("<i>").attr({
-              class: "far fa-save"
-            })
-          );
-        var fieldValue = rowToUpdate[k];
-        $(fieldValue).html(
-          $("<form>")
-            .attr({ id: "newForm" + k })
-            .append(saveBtn)
-        );
-      }
-    }
-  }
+  // This function replaced all the td in each row
+  // function insertEditFields() {
+  //   var newOption;
+  //   for (var k = 0; k < 5; k++) {
+  //     if (k < 3) {
+  //       var newInput = $("<input>")
+  //         .attr({
+  //           id: "field" + k,
+  //           type: "text"
+  //         })
+  //         .val(valArray[k]);
+  //       console.log("Inserting text field...");
+  //       console.log(rowToUpdate[k]);
+  //       var fieldValue = rowToUpdate[k];
+  //       $(fieldValue).html(
+  //         $("<form>")
+  //           .attr({ id: "newForm" + k })
+  //           .append(newInput)
+  //       );
+  //     } else if (k === 3) {
+  //       var newDrop = $("<select>").attr({
+  //         id: "fieldDrop" + idToUpdate
+  //       });
+  //       var fieldValue = rowToUpdate[k];
+  //       $(fieldValue).html(
+  //         $("<form>")
+  //           .attr({ id: "newForm" + k })
+  //           .append(newDrop)
+  //       );
+  //       for (var l = 0; l < categoryArray.length; l++) {
+  //         newOption = $("<option>")
+  //           .attr({
+  //             value: categoryArray[l]
+  //           })
+  //           .text(categoryArray[l]);
+  //         $(newDrop).append(newOption);
+  //       }
+  //     } else if (k === 4) {
+  //       console.log("Creating save button...");
+  //       var saveBtn = $("<button>")
+  //         .attr({
+  //           class: "btn btn-info save",
+  //           id: "save" + idToUpdate
+  //         })
+  //         .append(
+  //           $("<i>").attr({
+  //             class: "far fa-save"
+  //           })
+  //         );
+  //       var fieldValue = rowToUpdate[k];
+  //       $(fieldValue).html(
+  //         $("<form>")
+  //           .attr({ id: "newForm" + k })
+  //           .append(saveBtn)
+  //       );
+  //     }
+  //   }
+  // }
   getValues(rowToUpdate);
 
   console.log(valArray);
@@ -247,3 +272,38 @@ $expenseList.on("click", ".delete", handleDeleteBtnClick);
 $expenseList.on("click", ".update", handleUpdateBtnClick);
 
 refreshExpenses();
+
+// Testing modal with template from previous project
+// $(".homePage").hide();
+// Get the modal
+var modal = document.getElementById("editModal");
+
+// Get the button that opens the modal
+// var btn = document.getElementById("scheduleModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+// $(document.body).on("click", "#scheduleModal", function() {
+//     modal.style.display = "block";
+// })
+
+// When the user clicks on <span> (x), close the modal
+$(document.body).on("click", ".close", function() {
+  modal.style.display = "none";
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+// Hide login/Create account, show homePage
+// $("#login").on("click", function(event) {
+//     event.preventDefault();
+//     $(".landingPage").hide();
+//     $(".homePage").show();
+// })

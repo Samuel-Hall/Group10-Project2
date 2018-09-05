@@ -1,4 +1,3 @@
-
 <!-- THIS VIEW IS FOR THE HOME PAGE -->
 
 <!-- The modal I added won't open for me (maybe I'm missing a CDN in sync with this file?) -->
@@ -17,59 +16,59 @@
         <h2>This is our Home Page!</h2>
 
 
-<!-- Button to trigger "NEW EXPENSE" modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newExpenseModal">
-  Add a new expense!
-</button></br>
+        <!-- Button to trigger "NEW EXPENSE" modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newExpenseModal">
+          Add a new expense!
+        </button></br>
 
-<!-- Modal that SHOULD contain our NEW EXPENSE form... can't get it to open for some reason ... -->
-<div class="modal fade" id="newExpenseModal" tabindex="-1" role="dialog" aria-labelledby="newExpenseModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="newExpenseModalLabel">What did you purchase?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-        <!-- Exact same form as below. Should open in modal when button is triggered... -->
-       <form class="clearfix mb-4" action="POST">
+        <!-- Modal that SHOULD contain our NEW EXPENSE form... can't get it to open for some reason ... -->
+        <div class="modal fade" id="newExpenseModal" tabindex="-1" role="dialog" aria-labelledby="newExpenseModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="newExpenseModalLabel">What did you purchase?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
 
-          <div class="form-group">
-            <label for="title">Expense</label>
-            <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="Enter text">
-          </div>
+                <!-- Exact same form as below. Should open in modal when button is triggered... -->
+                <form class="clearfix mb-4" action="POST">
 
-          <div class="form-group">
-            <label for="total">Total</label>
-            <input type="text" class="form-control" id="total" aria-describedby="total" placeholder="Enter text">
-          </div>
+                  <div class="form-group">
+                    <label for="title">Expense</label>
+                    <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="Enter text">
+                  </div>
 
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input type="text" class="form-control" id="date" aria-describedby="date" placeholder="Enter text">
-          </div>
+                  <div class="form-group">
+                    <label for="total">Total</label>
+                    <input type="text" class="form-control" id="total" aria-describedby="total" placeholder="Enter text">
+                  </div>
 
-          <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" class="form-control" id="category" aria-describedby="category" placeholder="Enter text">
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
+                  <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="text" class="form-control" id="date" aria-describedby="date" placeholder="Enter text">
+                  </div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save new entry</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+                  <div class="form-group">
+                    <label for="category">Category</label>
+                    <input type="text" class="form-control" id="category" aria-describedby="category" placeholder="Enter text">
+                  </div>
+                  <button id="submit" class="btn btn-primary float-right">Submit</button>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save new entry</button>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
 
-<!-- Left the old form in place until modal version is working. Can be re-formatted some to demand less space -->
+        <!-- Left the old form in place until modal version is working. Can be re-formatted some to demand less space -->
         <form class="clearfix mb-4" action="POST">
 
           <div class="form-group">
@@ -100,7 +99,47 @@
       </div>
     </div>
   </div>
+
+
+  {{!-- Testing update modal with format from a previous project --}}
+  <!-- The Modal -->
+
+  <div id="editModal" class="modal">
+
+    <!-- Modal content -->
+
+    <div class="modal-content col-md-6 offset-md-3">
+
+      <h3 class="float-left">Update Expense</h3>
+      <span class="close text-right">&times;</span>
+
+      <form class="clearfix mb-4" action="POST">
+        <div class="form-group">
+          <label for="title">Expense</label>
+          <input type="text" class="form-control" id="editExpense" aria-describedby="title" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="total">Total ($)</label>
+          <input type="text" class="form-control" id="editTotal" aria-describedby="total" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="text" class="form-control datePicker" id="editDate" aria-describedby="date" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select class="form-control" id="editCategory" aria-describedby="category" placeholder="Enter text"></select>
+        </div>
+        <button id="submit" class="btn btn-info far fa-save float-right"> Save</button>
+      </form>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
