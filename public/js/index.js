@@ -323,6 +323,38 @@ window.onclick = function(event) {
   }
 };
 
+
+//NEW EXPENSE BTN / MODAL
+
+var newExpenseBtn = document.getElementById("newExpenseBtn");
+var newExpenseModal = document.getElementById("newExpenseModal");
+var closeBtn = document.getElementById("closeBtn");
+
+newExpenseBtn.onclick = function() {
+ newExpenseModal.style.display = "block";
+ console.log("Clicked it!")
+};
+
+
+window.onclick = function(event) {
+  if (event.target == newExpenseModal) {
+    newExpenseModal.style.display = "none";
+  }
+};
+
+closeBtn.onclick = function() {
+  newExpenseModal.style.display = "none";
+}
+
+$submitBtn.onclick = function() {
+  console.log("Submit button clicked")
+}
+
+// $(document.body).on("click", "#closeBtn", function() {  
+//   newExpenseModal.style.display = "none";
+// }
+
+
 // Hide login/Create account, show homePage
 // $("#login").on("click", function(event) {
 //     event.preventDefault();

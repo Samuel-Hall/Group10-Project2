@@ -2,6 +2,16 @@
   line-height: 2.5;
 }
 
+.navbar-brand {
+  color: white !important;
+  font-weight: bolder;
+}
+
+.page-header {
+  margin-top: 20px;
+  text-align: center;
+}
+
 /* The Modal (background) */
 .modal {
   */display: none;
@@ -32,4 +42,24 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+}
+
+.summary-chart {
+  margin-top: 30px;
+}
+
+#myChart {
+  border: 1px solid grey;
+}
+
+.expenseHistory {
+  margin-top: 30px;
+}
+
+#newExpenseModal {
+  text-align: left;
+  width: 50%;
+  min-width: 300px;
+  margin: 0 auto;
+
 }
