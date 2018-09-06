@@ -3,79 +3,29 @@
 <!-- The modal I added won't open for me (maybe I'm missing a CDN in sync with this file?) -->
 <!-- ... But the idea is that this page would show a list of expenses (maybe some sorting options?)-->
 <!-- .... and would include a BUTTON to open a modal for adding new expenses into the database -->
-<div class = "home-view">
-<nav class="navbar navbar-light" style="background-color: hsl(143, 99%, 31%);">
-  <a class="navbar-brand" href="#">$pendTracker</a>
-</nav>
+<div class="home-view">
+  <nav class="navbar navbar-light" style="background-color: hsl(143, 99%, 31%);">
+    <a class="navbar-brand" href="#">$pendTracker</a>
+  </nav>
 
-<div id="home">
+  <div id="home">
 
-  <div class="container center-div">
-    <div class="page-header row-fluid center-div">
+    <div class="container center-div">
+      <div class="page-header row-fluid center-div">
         <h2>Hi, username!</h2>
 
         <!-- Button to trigger "NEW EXPENSE" modal -->
         <button type="button" id="newExpenseBtn" class="btn btn-primary" data-toggle="modal" data-target="#newExpenseModal">
           Add a new expense!
         </button></br>
- 
 
-    <div class="container summary-chart">
-        <h5>Your weekly activity summary:</h5>
-        <canvas id="myChart" width="500" height="250"></canvas>
-        <p>(DEV NOTE: Could be bar chart of daily expenses, rolling 7-day window)</p>
-    </div>
+        <div class="container summary-chart">
+          <h5>Your weekly activity summary:</h5>
+          <canvas id="myChart" width="500" height="250"></canvas>
+          <p>(DEV NOTE: Could be bar chart of daily expenses, rolling 7-day window)</p>
+        </div>
 
-        <!-- Modal that SHOULD contain our NEW EXPENSE form... can't get it to open for some reason ... -->
-        <div class="modal" id="newExpenseModal" aria-hidden="true">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="newExpenseModalLabel">What did you purchase?</h5>
-                {{!-- <button type="button" id="closeBtn" class="closeBtn" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button> --}}
-              </div>
-              <div class="modal-body">
-
-                <!-- Exact same form as below. Should open in modal when button is triggered... -->
-                <form class="clearfix mb-4" action="POST">
-
-                  <div class="form-group">
-                    <label for="title">Expense</label>
-                    <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="What was it?">
-
-                  </div>
-
-                  <div class="form-group">
-                    <label for="total">Total</label>
-                    <input type="text" class="form-control" id="total" aria-describedby="total" placeholder="$...">
-
-                  </div>
-
-                  <div class="form-group">
-                    <label for="date">Date</label>
-                    <input type="text" class="form-control datePicker" id="date" aria-describedby="date" placeholder="Date of expense?">
-
-                  </div>
-
-                  <div class="form-group">
-                    <label for="category">Category</label>
-                    <select class="form-control" id="category" aria-describedby="category" placeholder="What category?"></select>
-
-                  </div>
-                  <button id="submit" class="btn btn-primary float-right">Submit</button>
-
-                </form>
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-
-
-  <div class="container expenseHistory"></div>
+        <div class="container expenseHistory"></div>
         <h3>Your Recent Expenses</h3>
         <table id="expense-list" class="table table-striped text-center">
         </table>
@@ -83,7 +33,42 @@
     </div>
   </div>
 
+  {{!-- Testing Add New Expense modal with format from a previous project --}}
+  <!-- The Modal -->
 
+  <div id="newExpenseModal" class="modal">
+
+    <!-- Modal content -->
+
+    <div class="modal-content col-md-6 offset-md-3">
+
+      <h3 class="float-left">Add New Expense</h3>
+      <span class="close text-right">&times;</span>
+
+      <form class="clearfix mb-4" action="POST">
+        <div class="form-group">
+          <label for="title">Expense</label>
+          <input type="text" class="form-control" id="addExpense" aria-describedby="title" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="total">Total ($)</label>
+          <input type="text" class="form-control" id="addTotal" aria-describedby="total" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="text" class="form-control datePicker" id="addDate" aria-describedby="date" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select class="form-control" id="addCategory" aria-describedby="category" placeholder="Enter text"></select>
+        </div>
+        <button id="submit" class="btn btn-info">Submit</button>
+      </form>
+    </div>
+  </div>
 
   {{!-- Testing update modal with format from a previous project --}}
   <!-- The Modal -->
@@ -127,5 +112,3 @@
 <script src="/js/index.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
-
-  
