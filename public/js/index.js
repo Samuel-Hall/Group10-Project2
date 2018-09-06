@@ -6,6 +6,7 @@ var category = $("#category");
 var $submitBtn = $("#submit");
 var $expenseList = $("#expense-list");
 var categoryArray = ["Category 1", "Category 2", "Category 3"];
+// module.exports = categoryArray;
 
 // The API object contains methods for each kind of request we'll make
 var API = {

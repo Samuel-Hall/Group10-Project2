@@ -12,16 +12,23 @@
   <div class="container">
     <div class="row">
       <div class="col-8 offset-2">
-        </br><h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
+        {{!-- Testing ChartJS --}}
+        <canvas id="myChart" width="200" height="100"></canvas>
+
+
+
+
+        {{!-- </br><h1>{{msg}}</h1>
+        <h2>This is our Home Page!</h2> --}}
 
 
         <!-- Button to trigger "NEW EXPENSE" modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newExpenseModal">
+        {{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newExpenseModal">
           Add a new expense!
-        </button></br>
+        </button></br> --}}
 
         <!-- Modal that SHOULD contain our NEW EXPENSE form... can't get it to open for some reason ... -->
+        {{!--
         <div class="modal fade" id="newExpenseModal" tabindex="-1" role="dialog" aria-labelledby="newExpenseModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -31,9 +38,10 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
+              <div class="modal-body"> --}}
 
                 <!-- Exact same form as below. Should open in modal when button is triggered... -->
+                {{!--
                 <form class="clearfix mb-4" action="POST">
 
                   <div class="form-group">
@@ -65,10 +73,11 @@
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        </div><!-- /.modal -->--}}
 
 
         <!-- Left the old form in place until modal version is working. Can be re-formatted some to demand less space -->
+        {{!--
         <form class="clearfix mb-4" action="POST">
 
           <div class="form-group">
@@ -91,7 +100,7 @@
             <input type="text" class="form-control" id="category" aria-describedby="category" placeholder="Enter text">
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
+        </form> --}}
 
         <h3>History:</h3>
         <table id="expense-list" class="table table-striped text-center">
@@ -138,8 +147,10 @@
     </div>
   </div>
 </div>
-
+{{!-- JQuery & JQUI--}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/index.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script> {{!-- ChartJS --}}
+<script src="/js/index.js"></script>{{!-- Custom JavaScript --}}
+<script src="/js/charts.js"></script>{{!-- Custom JavaScript --}}
