@@ -1,8 +1,8 @@
 // Get references to page elements
-var title = $("#title");
-var total = $("#total");
-var date = $("#date");
-var category = $("#category");
+var addExpense = $("#addExpense");
+var addTotal = $("#addTotal");
+var addDate = $("#addDate");
+var addCategory = $("#addCategory");
 var $submitBtn = $("#submit");
 var $expenseList = $("#expense-list");
 var categoryArray = ["Category 1", "Category 2", "Category 3"];
@@ -107,22 +107,22 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
   console.log("hello");
 
-  console.log("title: " + title.val());
-  console.log("total: " + total.val());
-  console.log("date: " + date.val());
-  console.log("category: " + category.val());
+  console.log("expense: " + addExpense.val());
+  console.log("total: " + addTotal.val());
+  console.log("date: " + addDate.val());
+  console.log("category: " + addCategory.val());
 
   var expense = {
-    title: title.val().trim(),
-    total: total.val().trim(),
-    date: date.val().trim(),
-    category: category.val().trim()
+    expense: addExpense.val().trim(),
+    total: addTotal.val().trim(),
+    date: addDate.val().trim(),
+    category: addCategory.val().trim()
   };
 
   console.log(expense);
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(expense.expense || expense.total || expense.date || expense.category)) {
+    alert("You must complete the form!");
     return;
   }
 
@@ -130,8 +130,10 @@ var handleFormSubmit = function(event) {
     refreshExpenses();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  addExpense.val("");
+  addTotal.val("");
+  addDate.val("");
+  addCategory.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -320,6 +322,7 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks on <span> (x), close the modal
 $(document.body).on("click", ".close", function() {
   modal.style.display = "none";
+  newExpenseModal.style.display = "none";
 });
 
 // When the user clicks anywhere outside of the modal, close it
@@ -329,18 +332,30 @@ window.onclick = function(event) {
   }
 };
 
-
 //NEW EXPENSE BTN / MODAL
 
 var newExpenseBtn = document.getElementById("newExpenseBtn");
 var newExpenseModal = document.getElementById("newExpenseModal");
-var closeBtn = document.getElementById("closeBtn");
+// var closeBtn = document.getElementById("closeBtn");
 
 newExpenseBtn.onclick = function() {
- newExpenseModal.style.display = "block";
- console.log("Clicked it!")
+  newExpenseModal.style.display = "block";
+  console.log("Clicked it!");
+  $("#addCategory").html("");
+  // Populating the dropdown menu
+  for (var l = 0; l < categoryArray.length; l++) {
+    var newOption = $("<option>")
+      .attr({
+        value: categoryArray[l]
+      })
+      .text(categoryArray[l]);
+    $("#addCategory").append(newOption);
+  }
+  // Date picker for edit date field
+  $("#addDate").datepicker({
+    dateFormat: "yy-mm-dd"
+  });
 };
-
 
 window.onclick = function(event) {
   if (event.target == newExpenseModal) {
@@ -348,18 +363,17 @@ window.onclick = function(event) {
   }
 };
 
-closeBtn.onclick = function() {
-  newExpenseModal.style.display = "none";
-}
+// closeBtn.onclick = function() {
+//   newExpenseModal.style.display = "none";
+// };
 
 $submitBtn.onclick = function() {
-  console.log("Submit button clicked")
-}
+  console.log("Submit button clicked");
+};
 
-// $(document.body).on("click", "#closeBtn", function() {  
+// $(document.body).on("click", "#closeBtn", function() {
 //   newExpenseModal.style.display = "none";
 // }
-
 
 // Hide login/Create account, show homePage
 // $("#login").on("click", function(event) {
