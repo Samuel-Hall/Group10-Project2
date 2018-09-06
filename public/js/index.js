@@ -37,7 +37,8 @@ var API = {
       url: "/api/expenses",
       data: expense
     }).then(function() {
-      window.location.href = "/home";
+      // window.location.href = "/home";
+      refreshExpenses();
     });
   },
   deleteExpense: function(id) {
@@ -125,7 +126,7 @@ var handleFormSubmit = function(event) {
     return;
   }
 
-  API.saveExample(expense).then(function() {
+  API.saveExpense(expense).then(function() {
     refreshExpenses();
   });
 
@@ -149,6 +150,8 @@ var handleDeleteBtnClick = function() {
 };
 
 var handleUpdateBtnClick = function() {
+  // Prevent duplicate event listeners
+  $(".saveEdit").off("click");
   // Array to hold current row values
   var valArray = [];
   var updatedExpense = {
@@ -174,6 +177,7 @@ var handleUpdateBtnClick = function() {
   function displayEditModal() {
     modal.style.display = "block";
     $("#editCategory").html("");
+    // Populating the dropdown menu
     for (var l = 0; l < categoryArray.length; l++) {
       var newOption = $("<option>")
         .attr({
@@ -182,6 +186,7 @@ var handleUpdateBtnClick = function() {
         .text(categoryArray[l]);
       $("#editCategory").append(newOption);
     }
+    // Inserting the current values into the input fields
     $("#editExpense").val(valArray[0]);
     $("#editTotal").val(valArray[1]);
     $("#editDate").val(valArray[2]);
@@ -278,7 +283,8 @@ var handleUpdateBtnClick = function() {
     //   refreshExpenses();
     // });
   }
-  $(".saveEdit").on("click", function() {
+  //Event listener for save button
+  $(".saveEdit").on("click", function(event) {
     event.preventDefault();
     updateExpense();
     modal.style.display = "none";
