@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "pip123",
     "database": "expensedb",
     "host": "localhost",
     "dialect": "mysql",
