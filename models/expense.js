@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var Expense = sequelize.define("Expense", {
-    expense: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -27,6 +27,16 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [1]
       }
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal("CURRENT_TIMESTAMP")
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      defaultValue: sequelize.literal(
+        "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+      )
     }
   });
 
