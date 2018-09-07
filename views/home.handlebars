@@ -14,10 +14,7 @@
       <div class="page-header row-fluid center-div">
         <h2>Hi, {username}!</h2>
 
-        <!-- Button to trigger "NEW EXPENSE" modal -->
-        <button type="button" id="newExpenseBtn" class="btn btn-primary" data-toggle="modal" data-target="#newExpenseModal">
-          Add a new expense!
-        </button></br>
+
 
         <div class="container summary-chart">
           <h5>Your weekly activity summary:</h5>
@@ -27,6 +24,10 @@
 
         <div class="container expenseHistory"></div>
         <h3>Your Recent Expenses</h3>
+        <!-- Button to trigger "NEW EXPENSE" modal -->
+        <button type="button" id="newExpenseBtn" class="btn btn-primary float-right" data-toggle="modal" data-target="#newExpenseModal">
+          Add a new expense!
+        </button></br>
         <table id="expense-list" class="table table-striped text-center">
         </table>
       </div>

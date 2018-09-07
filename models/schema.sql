@@ -16,3 +16,9 @@ INSERT INTO expenses (expense, total, date, category) VALUES ("Test6", 33.05, '2
 INSERT INTO users (userName, password, mobile) VALUES ("TestUser1", "PassworD", 1234567891);
 SELECT * FROM expenses;
 SELECT * FROM users;
+
+
+SELECT category, YEAR(date), MONTHNAME(date), SUM(total)
+FROM Expenses
+Group BY category, YEAR(date), MONTHNAME(date)
+ORDER BY category, date ASC;
