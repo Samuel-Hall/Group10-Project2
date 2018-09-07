@@ -19,15 +19,15 @@
     <form class="form-signin">
       <img class="mb-4" src="$pend.png" alt="" width="110" height="110">
       <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
-      <label for="inputEmail" class="sr-only"></label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <label for="inputUserName" class="sr-only"></label>
+      <input type="userName" id="loginUserName" class="form-control" placeholder="Username">
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <div class="checkbox mb-3">
+      <input type="password" id="loginPassword" class="form-control" placeholder="Password">
+      {{!-- <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-      </div>
+      </div> --}}
       <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
       <button class="btn btn-sm btn-secondary btn-block btn-registerpage" type="submit">New to $pendTracker?</button>
     </div>

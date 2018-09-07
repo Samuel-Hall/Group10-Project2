@@ -45,4 +45,15 @@ module.exports = function(app) {
       res.json(dbExpense);
     });
   });
+
+
+    // Create a new user
+    app.post("/api/users", function(req, res) {
+      console.log(req);
+      db.User.create(req.body).then(function(dbUser) {
+        res.json(dbUser);
+      });
+    });
+
 };
+
