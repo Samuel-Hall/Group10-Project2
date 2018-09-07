@@ -13,23 +13,6 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         len: [6]
       }
-    },
-    mobile: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [9]
-      }
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      defaultValue: sequelize.literal("CURRENT_TIMESTAMP")
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      defaultValue: sequelize.literal(
-        "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
-      )
     }
   });
 
