@@ -47,6 +47,17 @@ var API = {
       url: "api/expenses/" + id,
       type: "DELETE"
     });
+  },
+  getChartData: function() {
+    console.log("getting stuff for charts!");
+    return $.ajax({
+      url: "api/expenseChart/",
+      type: "GET"
+    });
+
+    // .then(function(results) {
+    //   console.log(results);
+    // })
   }
 };
 
