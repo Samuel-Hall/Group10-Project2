@@ -25,7 +25,7 @@ var handleLogin = function(event) {
 // for a match of BOTH
 
   console.log(loginAttempt);
-ywe
+
 
 if (!(loginAttempt.userName || loginAttempt.password)) {
     alert("All fields are required to login!");

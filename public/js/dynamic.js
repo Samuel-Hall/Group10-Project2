@@ -1,5 +1,4 @@
-$(".landingPage").hide();
-$(".homePage").show();
+$(".homePage").hide();
 
 
 // Hide login/Create account, show homePage

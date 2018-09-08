@@ -46,7 +46,6 @@ module.exports = function(app) {
     });
   });
 
-<<<<<<< HEAD
 
 
  // Create a new user (WORKS)
@@ -74,7 +73,7 @@ app.get("/api/users/:newUser", function(req, res) {
   res.json(obj);
 })
 });
-}
+
 
   // Turning this into sequelize:
   // SELECT category, YEAR(date), MONTHNAME(date), SUM(total)
@@ -108,5 +107,6 @@ app.get("/api/users/:newUser", function(req, res) {
         console.log(err);
       });
   });
-};
 
+
+}
