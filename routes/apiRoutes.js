@@ -46,6 +46,35 @@ module.exports = function(app) {
     });
   });
 
+
+
+ // Create a new user (WORKS)
+ app.post("/api/users/", function(req, res) {
+  console.log(req);
+  
+  db.User.create(req.body).then(function(dbUser) {
+    res.json(dbUser);
+  });
+});
+
+// No longer running....
+app.get("/api/users/:newUser", function(req, res) {
+  console.log("req ... " + req)
+  db.User.count({ where: { userName: "alex2" } }) //addUserName is not defined | also newUser.userName is not defined
+  .then(count => {
+    if (count != 0) {
+      console.log("Username already exists!")
+      return false;
+    }
+    else { console.log("Username is available!");
+    return true;
+  }
+}).then(function(obj){
+  res.json(obj);
+})
+});
+
+
   // Turning this into sequelize:
   // SELECT category, YEAR(date), MONTHNAME(date), SUM(total)
   // FROM Expenses
@@ -81,4 +110,6 @@ module.exports = function(app) {
         console.log(err);
       });
   });
-};
+
+
+}

@@ -1,6 +1,6 @@
 
 <!-- THIS VIEW IS TO SIGN IN  -->
-
+<div class="landingPage">
 <title>Sign in to $pendTracker</title>
 
   <body class="text-center">
@@ -14,27 +14,132 @@
         </div>
       </div>
 
-
     <div class="container center-div">
     <form class="form-signin">
       <img class="mb-4" src="$pend.png" alt="" width="110" height="110">
       <h1 class="h3 mb-3 font-weight-normal">Sign in</h1>
-      <label for="inputEmail" class="sr-only"></label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+      <label for="userName" class="sr-only"></label>
+      <input type="userName" id="inputUser" class="form-control" placeholder="Username">
       <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <input type="password" id="inputPassword" class="form-control" placeholder="Password">
       <div class="checkbox mb-3">
         <label>
           <input type="checkbox" value="remember-me"> Remember me
         </label>
       </div>
-      <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+      <button id="login" class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
       <button class="btn btn-sm btn-secondary btn-block btn-registerpage" type="submit">New to $pendTracker?</button>
     </div>
     </form>
+</div>
+<!-- END OF LANDING PAGE VIEW -->
+
+<!-- THIS VIEW IS FOR THE HOME PAGE -->
+<div class="homePage">
+  <nav class="navbar navbar-light" style="background-color: hsl(143, 99%, 31%);">
+    <a class="navbar-brand" href="#">$pendTracker</a>
+  </nav>
+
+  <div id="home">
+
+    <div class="container center-div">
+      <div class="page-header row-fluid center-div">
+        <h2>Hi, {username}!</h2>
+
+        <div class="container summary-chart">
+          <h5>Your weekly activity summary:</h5>
+          <canvas id="myChart" width="500" height="250"></canvas>
+          <p>(DEV NOTE: Could be bar chart of daily expenses, rolling 7-day window)</p>
+        </div>
+
+        <div class="container expenseHistory"></div>
+        <h3>Your Recent Expenses</h3>
+
+        <!-- Button to trigger "NEW EXPENSE" modal -->
+        <button type="button" id="newExpenseBtn" class="btn btn-primary float-right" data-toggle="modal" data-target="#newExpenseModal">
+          Add a new expense!
+        </button></br>
+        <table id="expense-list" class="table table-striped text-center">
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- The "Add Expense" Modal -->
+  <div id="newExpenseModal" class="modal">
+
+
+    <div class="modal-content col-md-6 offset-md-3">
+
+      <h3 class="float-left">Add New Expense</h3>
+      <span class="close text-right">&times;</span>
+
+      <form class="clearfix mb-4" action="POST">
+        <div class="form-group">
+          <label for="title">Expense</label>
+          <input type="text" class="form-control" id="addExpense" aria-describedby="title" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="total">Total ($)</label>
+          <input type="text" class="form-control" id="addTotal" aria-describedby="total" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="text" class="form-control datePicker" id="addDate" aria-describedby="date" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select class="form-control" id="addCategory" aria-describedby="category" placeholder="Enter text"></select>
+        </div>
+        <button id="submit" class="btn btn-info">Submit</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- The "Edit" Modal -->
+  <div id="editModal" class="modal">
+
+    <div class="modal-content col-md-6 offset-md-3">
+
+      <h3 class="float-left">Update Expense</h3>
+      <span class="close text-right">&times;</span>
+
+      <form class="clearfix mb-4" action="POST">
+        <div class="form-group">
+          <label for="title">Expense</label>
+          <input type="text" class="form-control" id="editExpense" aria-describedby="title" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="total">Total ($)</label>
+          <input type="text" class="form-control" id="editTotal" aria-describedby="total" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="text" class="form-control datePicker" id="editDate" aria-describedby="date" placeholder="Enter text">
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select class="form-control" id="editCategory" aria-describedby="category" placeholder="Enter text"></select>
+        </div>
+        <button id="submitEdits" class="btn btn-info far fa-save float-right saveEdit"> Save</button>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/login.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
+<script src="/js/charts.js"></script>{{!-- Custom JavaScript --}}
+<script src="/js/index.js"></script>{{!-- Custom JavaScript --}}
+<script src="/js/login.js"></script>
+<script src="/js/dynamic.js"></script>
