@@ -5,7 +5,13 @@ var addDate = $("#addDate");
 var addCategory = $("#addCategory");
 var $submitBtn = $("#submit");
 var $expenseList = $("#expense-list");
-var categoryArray = ["Rent/Housing", "Utilities", "Groceries"];
+var categoryArray = [
+  "Rent/Housing",
+  "Electric",
+  "Gas",
+  "Groceries",
+  "Vehicle Expense"
+];
 // module.exports = categoryArray;
 
 // The API object contains methods for each kind of request we'll make

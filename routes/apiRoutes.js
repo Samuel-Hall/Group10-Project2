@@ -57,7 +57,7 @@ module.exports = function(app) {
         "category",
         [db.sequelize.fn("YEAR", db.sequelize.col("date")), "YEAR"],
         [db.sequelize.fn("MONTHNAME", db.sequelize.col("date")), "MONTH"],
-        db.sequelize.fn("SUM", db.sequelize.col("total"))
+        [db.sequelize.fn("SUM", db.sequelize.col("total")), "Total"]
       ],
       group: ["category", "YEAR", "MONTH"],
       order: [
@@ -70,6 +70,9 @@ module.exports = function(app) {
         var dbParsed = [];
         for (var i = 0; i < dbExpenses.length; i++) {
           dbParsed.push(dbExpenses[i].dataValues);
+        }
+        for (var j = 0; j < dbParsed.length; j++) {
+          dbParsed[j].Total = dbParsed[j].Total.toFixed(2);
         }
         res.json(dbParsed);
         console.log("List of Expenses ", dbParsed);
